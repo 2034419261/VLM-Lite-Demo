@@ -1,0 +1,13 @@
+def test_dataset_and_model():
+    from src.data.cifar_text import CIFARTextDataset
+    from src.models.clip_like import CLIPLikeModel, TEXT_TOKENS
+    ds = CIFARTextDataset(train=False, download=False)  # if you have downloaded earlier
+    img, text, label = ds[0]
+    model = CLIPLikeModel(img_model='resnet18', embed_dim=128, pretrained=False)
+    # run a tiny forward
+    import torch
+    imgs = torch.stack([img, img], dim=0)
+    class_ids = torch.tensor([TEXT_TOKENS[text], TEXT_TOKENS[text]], dtype=torch.long)
+    img_emb, txt_emb, s = model(imgs, class_ids)
+    assert img_emb.shape[1] == 128
+    assert txt_emb.shape[1] == 128

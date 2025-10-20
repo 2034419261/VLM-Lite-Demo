@@ -1,0 +1,13 @@
+torch>=1.13
+torchvision>=0.14
+timm>=0.6.12
+numpy
+pyyaml
+tqdm
+pytest
+transformers>=4.30
+torchvision
+Pillow
+opencv-python
+moviepy    
+
